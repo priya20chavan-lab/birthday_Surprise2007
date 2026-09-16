@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎂</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    overflow:hidden;
+}
+
+.page{
+    width:100%;
+    height:100vh;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.page.active{
+    display:flex;
+}
+
+#page1{
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+}
+
+#countdownPage{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+}
+
+#page2{
+    background:linear-gradient(135deg,#84fab0,#8fd3f4);
+}
+
+#page3{
+    background:linear-gradient(135deg,#fccb90,#d57eeb);
+    color:white;
+}
+
+#page4{
+    background:linear-gradient(135deg,#fbc2eb,#fef6e4);
+}
+
+.cake{
+    font-size:120px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.cake:hover{
+    transform:scale(1.1);
+}
+
+#countdown{
+    font-size:120px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.balloon-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:20px;
+    width:100%;
+    max-width:800px;
+    margin-top:30px;
+}
+
+.balloon{
+    font-size:80px;
+    cursor:pointer;
+}
+
+.message{
+    background:white;
+    color:black;
+    padding:10px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.memory-photo{
+    width:350px;
+    max-width:90%;
+    border-radius:20px;
+    margin:20px 0;
+    box-shadow:0 5px 20px rgba(0,0,0,.3);
+}
+
+.btn{
+    background:#ff4081;
+    color:white;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.btn:hover{
+    background:#e91e63;
+}
+
+.special-box{
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:20px;
+    max-width:700px;
+    box-shadow:0 6px 20px rgba(0,0,0,.2);
+}
+
+.special-box p{
+    line-height:1.8;
+}
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall 4s linear forwards;
+}
+
+@keyframes fall{
+
+    from{
+        transform:translateY(0) rotate(0deg);
+    }
+
+    to{
+        transform:translateY(120vh) rotate(720deg);
+    }
+
+}
+
+.heart{
+    position:fixed;
+    bottom:-50px;
+    font-size:25px;
+    animation:floatUp 6s linear forwards;
+}
+
+@keyframes floatUp{
+
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .cake{
+        font-size:90px;
+    }
+
+    #countdown{
+        font-size:80px;
+    }
+
+    .balloon{
+        font-size:60px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+
+<div id="page1" class="page active">
+
+    <h1>🎉 Birthday Surprise 🎉</h1>
+    <p>Click the Cake</p>
+
+    <div class="cake" onclick="startCountdown()">
+        🎂
+    </div>
+
+</div>
+
+<!-- COUNTDOWN -->
+
+<div id="countdownPage" class="page">
+
+    <h1>✨ Get Ready ✨</h1>
+
+    <div id="countdown">5</div>
+
+</div>
+
+<!-- BALLOONS -->
+
+<div id="page2" class="page">
+
+    <h1>🎈 Pop All 5 Balloons 🎈</h1>
+
+    <div class="balloon-container">
+
+        <div>
+            <div class="balloon" onclick="popBalloon(this,0)">🎈</div>
+        </div>
+
+        <div>
+            <div class="balloon" onclick="popBalloon(this,1)">🎈</div>
+        </div>
+
+        <div>
+            <div class="balloon" onclick="popBalloon(this,2)">🎈</div>
+        </div>
+
+        <div>
+            <div class="balloon" onclick="popBalloon(this,3)">🎈</div>
+        </div>
+
+        <div>
+            <div class="balloon" onclick="popBalloon(this,4)">🎈</div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MEMORY PAGE -->
+
+<div id="page3" class="page">
+
+    <h1>📸 Our Memory 📸</h1>
+
+    memory.jpg
+
+    <p>A beautiful memory that will stay forever ❤️</p>
+
+    <button class="btn" onclick="showSpecialMessage()">
+        Read Special Message 💌
+    </button>
+
+</div>
+
+<!-- MESSAGE PAGE -->
+
+<div id="page4" class="page">
+
+    <div class="special-box">
+
+        <h1>❤️ Happy Birthday ❤️</h1>
+
+        <p>
+
+        Dear Priyanka,
+
+        <br><br>
+
+        Wishing you a birthday filled with happiness,
+        laughter, success and endless joy.
+
+        <br><br>
+
+        Thank you for all the wonderful memories,
+        support and smiles.
+
+        <br><br>
+
+        May all your dreams come true and may this
+        year bring you everything you've been hoping for.
+
+        <br><br>
+
+        Stay happy, stay healthy and keep shining.
+
+        <br><br>
+
+        🎂 Happy Birthday 🎂
+
+        <br><br>
+
+        ❤️ With Lots of Love ❤️
+
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+/* EDIT THESE */
+
+const messages = [
+
+"Happy Birthday! 🎉",
+"May all your dreams come true ✨",
+"You are truly special ❤️",
+"Keep smiling always 😊",
+"Have an amazing year ahead 🎂"
+
+];
+
+let poppedCount = 0;
+
+/* PAGE NAVIGATION */
+
+function showPage(id){
+
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+}
+
+/* CONFETTI */
+
+function createConfetti(){
+
+    for(let i=0;i<120;i++){
+
+        const confetti=document.createElement("div");
+
+        confetti.className="confetti";
+
+        confetti.style.left=Math.random()*100+"vw";
+
+        confetti.style.background=
+        `hsl(${Math.random()*360},100%,50%)`;
+
+        confetti.style.animationDuration=
+        (Math.random()*3+2)+"s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(()=>{
+            confetti.remove();
+        },5000);
+    }
+}
+
+/* HEARTS */
+
+setInterval(()=>{
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    heart.innerHTML="❤️";
+
+    heart.style.left=Math.random()*100+"vw";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },6000);
+
+},1000);
+
+/* INITIAL CONFETTI */
+
+window.onload=function(){
+    createConfetti();
+};
+
+/* CAKE */
+
+function startCountdown(){
+
+    showPage("countdownPage");
+
+    let count=5;
+
+    document.getElementById("countdown").innerText=count;
+
+    const timer=setInterval(()=>{
+
+        count--;
+
+        if(count>0){
+
+            document.getElementById("countdown").innerText=count;
+
+        }else{
+
+            clearInterval(timer);
+
+            document.getElementById("countdown").innerText="🎉";
+
+            createConfetti();
+
+            setTimeout(()=>{
+                showPage("page2");
+            },1000);
+
+        }
+
+    },1000);
+}
+
+/* BALLOONS */
+
+function popBalloon(balloon,index){
+
+    if(balloon.dataset.done)return;
+
+    balloon.dataset.done=true;
+
+    balloon.innerHTML="💥";
+
+    const msg=document.createElement("div");
+
+    msg.className="message";
+
+    msg.innerHTML=messages[index];
+
+    balloon.parentNode.appendChild(msg);
+
+    poppedCount++;
+
+    if(poppedCount===5){
+
+        createConfetti();
+
+        setTimeout(()=>{
+            showPage("page3");
+        },1500);
+    }
+}
+
+/* SPECIAL MESSAGE */
+
+function showSpecialMessage(){
+
+    showPage("page4");
+
+    createConfetti();
+}
+
+</script>
+
+</body>
+</html>
